@@ -17,10 +17,10 @@ class Point {
             let theta = atan2(dy, dx);
             let new_x = this.pos.x + cos(theta) * touching_dist;
             let new_y = this.pos.y + sin(theta) * touching_dist;
-            let a_x = (new_x - points[i].pos.x) * COR;// - this.m;
-            let a_y = (new_y - points[i].pos.y) * COR;// - this.m;
-            this.vel.x -= a_x * HARDNESS;// / Math.pow(this.m, 2);
-            this.vel.y -= a_y * HARDNESS;// / Math.pow(this.m, 2);
+            let a_x = (new_x - points[i].pos.x) * COR - this.m;
+            let a_y = (new_y - points[i].pos.y) * COR - this.m;
+            this.vel.x -= a_x * HARDNESS / Math.pow(this.m, 2);
+            this.vel.y -= a_y * HARDNESS / Math.pow(this.m, 2);
             points[i].vel.x += a_x * HARDNESS;
             points[i].vel.y += a_y * HARDNESS; 
         }
@@ -58,10 +58,8 @@ class Point {
     }
     show() {
         let V = this.vel.magSq();
-        //console.log(V);
         colorMode(HSB, MAX_VEL, 1, 1)
         fill(V, 1, 1);
-        //noStroke();
         ellipse(this.pos.x, this.pos.y, 2 * this.r);
     }
 }
